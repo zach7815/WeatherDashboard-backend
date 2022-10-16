@@ -3,11 +3,14 @@ import * as dotenv from 'dotenv';
 import nodeFetch from 'node-fetch';
 import { createApi } from 'unsplash-js';
 import openCage from 'opencage-api-client';
+import {cors} from 'cors'
 dotenv.config();
 const app = express();
 app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
 app.use(express.json());
+
+
 
 const PORT= 8000;
 const openCageKey= process.env.OPENCAGE_API_KEY;
@@ -161,7 +164,7 @@ const randomNumber = (max)=>{
 
 
 // Post requests
-app.post("/api/search", async (req,res)=>{
+app.post("/api/search", cors(),async (req,res)=>{
 const location= req.body;
 const photoInfo= await getImage(location);
 const weather= await getWeather("weather",undefined, undefined, location.city);
@@ -171,7 +174,7 @@ res.end()
 
 })
 
-app.post("/api/unsplashImages",  async (req,res)=>{
+app.post("/api/unsplashImages", cors() ,async (req,res)=>{
 
     let    lat=req.body.lat;
     let  lng=req.body.lng;
@@ -191,7 +194,7 @@ console.log(error);
 
 })
 
-app.post("/api/currentWeather",async (req,res)=>{
+app.post("/api/currentWeather",cors(),async (req,res)=>{
  const lat=req.body.lat;
  const lng=req.body.lng;
 const currentWeather = await getWeather("weather",lat,lng);
@@ -199,7 +202,7 @@ res.json(currentWeather);
 res.end()
 })
 
-app.post("/api/fiveDayForecast",async(req,res)=>{
+app.post("/api/fiveDayForecast",cors(),async(req,res)=>{
 let lat=req.body.lat;
 let lng=req.body.lng;
  const forecast = await getForecast("forecast",lat, lng);
