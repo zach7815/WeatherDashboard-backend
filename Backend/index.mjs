@@ -10,6 +10,10 @@ app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
 app.use(express.json());
 
+app.use(cors({
+    origin:"https://weather-dashboard.onrender.com/"
+}))
+
 app.use(function(req, res, next){
     res.setHeader('Access-Control-Allow-Origin', 'https://weather-dashboard.onrender.com/');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
