@@ -12,8 +12,8 @@ app.use(express.json());
 
 const corsOptions = {
     origin: 'https://weather-dashboard-backend.onrender.com',
-    optionsSuccessStatus: 200 // For legacy browser support
-    methods: "POST"
+    optionsSuccessStatus: 200, // For legacy browser support
+    methods: "POST",
 }
 
 app.use(cors(corsOptions));
