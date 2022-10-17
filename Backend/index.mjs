@@ -21,7 +21,7 @@ app.use(function(req, res, next){
 });
 
 
-const PORT= 8000;
+const PORT = process.env.PORT || 8000;
 const openCageKey= process.env.OPENCAGE_API_KEY;
 const unSplashAccessKey=process.env.UNSPLASH_ACESS_KEY;
 const openWeatherKey=process.env.OPEN_WEATHER_KEY;
