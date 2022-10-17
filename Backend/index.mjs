@@ -15,19 +15,11 @@ app.use(express.json());
 
 
 app.use(function (req, res, next) {
-    const allowedOrigins= ['https://weather-dashboard-backend.onrender.com/',
-     "https://weather-dashboard-backend.onrender.com/api/search",
-     "https://weather-dashboard-backend.onrender.com/api/currentWeather",
-     "https://weather-dashboard-backend.onrender.com/api/fiveDayForecast",
-     "https://weather-dashboard-backend.onrender.com/api/unsplashImages"
-    ]
-
-    if (allowedOrigins.indexOf(req.headers.origin !==-1)){
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        res.setHeader('Access-Control-Allow-Origin', "https://weather-dashboard-backend.onrender.com/'");
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
         res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         res.setHeader('Access-Control-Allow-Credentials', true);
-    }
+
     next();
     });
 
