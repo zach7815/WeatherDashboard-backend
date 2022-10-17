@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import nodeFetch from 'node-fetch';
 import { createApi } from 'unsplash-js';
 import openCage from 'opencage-api-client';
-import cors from "./cors";
+import cors from "./cors/cors";
 
 dotenv.config();
 const app = express();
