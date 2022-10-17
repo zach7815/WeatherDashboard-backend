@@ -177,7 +177,7 @@ const randomNumber = (max)=>{
 
 
 // Post requests
-app.post("/api/search",async (req,res)=>{
+app.post("/api/search", cors(corsOptions),async (req,res)=>{
 const location= req.body;
 try{ 
 const photoInfo= await getImage(location);
@@ -193,7 +193,7 @@ res.end()
 
 })
 
-app.post("/api/unsplashImages" ,async (req,res)=>{
+app.post("/api/unsplashImages", cors(corsOptions) ,async (req,res)=>{
 
     let    lat=req.body.lat;
     let  lng=req.body.lng;
@@ -214,7 +214,7 @@ catch(error){
 
 })
 
-app.post("/api/currentWeather",async (req,res)=>{
+app.post("/api/currentWeather",cors(corsOptions),async (req,res)=>{
  const lat=req.body.lat;
  const lng=req.body.lng;
     try{
@@ -227,7 +227,7 @@ res.end()
     }
 })
 
-app.post("/api/fiveDayForecast",cors(),async(req,res)=>{
+app.post("/api/fiveDayForecast",cors(corsOptions),async(req,res)=>{
 let lat=req.body.lat;
 let lng=req.body.lng;
     try{
