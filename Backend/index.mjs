@@ -11,7 +11,7 @@ app.use(express.json({limit:'1mb'}));
 app.use(express.json());
 
 const corsOptions = {
-    origin: 'https://weather-dashboard-backend.onrender.com',
+    origin: 'https://weather-dashboard.onrender.com/',
     optionsSuccessStatus: 200, // For legacy browser support
 }
 
