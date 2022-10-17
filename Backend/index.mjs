@@ -173,7 +173,7 @@ const randomNumber = (max)=>{
 
 
 // Post requests
-app.post("https://weather-dashboard-backend.onrender.com/api/search", cors(),async (req,res)=>{
+app.post("/api/search", cors(),async (req,res)=>{
 const location= req.body;
 const photoInfo= await getImage(location);
 const weather= await getWeather("weather",undefined, undefined, location.city);
@@ -183,7 +183,7 @@ res.end()
 
 })
 
-app.post("https://weather-dashboard-backend.onrender.com/api/unsplashImages", cors() ,async (req,res)=>{
+app.post("/api/unsplashImages", cors() ,async (req,res)=>{
 
     let    lat=req.body.lat;
     let  lng=req.body.lng;
@@ -203,7 +203,7 @@ console.log(error);
 
 })
 
-app.post("https://weather-dashboard-backend.onrender.com/api/currentWeather",cors(),async (req,res)=>{
+app.post("/api/currentWeather",cors(),async (req,res)=>{
  const lat=req.body.lat;
  const lng=req.body.lng;
 const currentWeather = await getWeather("weather",lat,lng);
@@ -211,7 +211,7 @@ res.json(currentWeather);
 res.end()
 })
 
-app.post("https://weather-dashboard-backend.onrender.com/api/fiveDayForecast",cors(),async(req,res)=>{
+app.post("/api/fiveDayForecast",cors(),async(req,res)=>{
 let lat=req.body.lat;
 let lng=req.body.lng;
  const forecast = await getForecast("forecast",lat, lng);
