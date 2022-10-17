@@ -10,7 +10,13 @@ app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
 app.use(express.json());
 
-app.use(cors());
+const corsOptions = {
+    origin: 'https://weather-dashboard-backend.onrender.com',
+    optionsSuccessStatus: 200 // For legacy browser support
+    methods: "POST"
+}
+
+app.use(cors(corsOptions));
 
 app.use(function(req, res, next){
     res.setHeader('Access-Control-Allow-Origin', 'https://weather-dashboard.onrender.com/');
@@ -193,7 +199,9 @@ app.post("/api/unsplashImages" ,async (req,res)=>{
         let geoData=`${encodeURIComponent(lat)},${encodeURIComponent(lng)}`;
 try{
  const result = await openCage.geocode({q:geoData, key:openCageKey, language:"En"});
+    console.log(result)
 const locationData = await result;
+    console.log(locationData)
 const locationObject =await destructGeoData(locationData);
 const refinedImageData = await getImage(locationObject);
 res.json(refinedImageData);
