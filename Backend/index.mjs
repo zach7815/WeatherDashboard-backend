@@ -183,6 +183,7 @@ try{
 const photoInfo= await getImage(location);
 const weather= await getWeather("weather",undefined, undefined, location.city);
 const forecast = await getForecast("forecast",undefined, undefined, location.city);
+      console.log(photoInfo, weather, forecast);
 res.json([photoInfo, weather, forecast])
 res.end()
 }
@@ -199,11 +200,10 @@ app.post("/api/unsplashImages" ,async (req,res)=>{
         let geoData=`${encodeURIComponent(lat)},${encodeURIComponent(lng)}`;
 try{
  const result = await openCage.geocode({q:geoData, key:openCageKey, language:"En"});
-    console.log(result)
 const locationData = await result;
-    console.log(locationData)
 const locationObject =await destructGeoData(locationData);
 const refinedImageData = await getImage(locationObject);
+    console.log(refinedImageData);
 res.json(refinedImageData);
 res.end();
 }
@@ -232,6 +232,7 @@ let lat=req.body.lat;
 let lng=req.body.lng;
     try{
  const forecast = await getForecast("forecast",lat, lng);
+          console.log(forecast);
 res.json(forecast);
 res.end();
     }
