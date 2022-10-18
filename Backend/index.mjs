@@ -7,25 +7,20 @@ import openCage from 'opencage-api-client';
 dotenv.config();
 const app = express();
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+    });
+
+
+
 
 app.use(express.static('public'));
 app.use(express.json({limit:'1mb'}));
 app.use(express.json());
-
-
-app.use((req, res, next) => {
-
-
-         res.setHeader('Access-Control-Allow-Origin', "*");
-         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        res.setHeader('Access-Control-Allow-Credentials', true);
-
-
-    return next();
-  });
-
-
 
 const PORT = process.env.PORT || 8000;
 const openCageKey= process.env.OPENCAGE_API_KEY;
