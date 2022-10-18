@@ -14,19 +14,14 @@ app.use(express.json());
 
 
 app.use((req, res, next) => {
-    const allowedOrigins= ['https://weather-dashboard-backend.onrender.com/',
-    "https://weather-dashboard-backend.onrender.com/api/search",
-    "https://weather-dashboard-backend.onrender.com/api/currentWeather",
-    "https://weather-dashboard-backend.onrender.com/api/fiveDayForecast",
-    "https://weather-dashboard-backend.onrender.com/api/unsplashImages"
-   ];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-         res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+         res.setHeader('Access-Control-Allow-Origin', "*");
+         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        res.setHeader('Access-Control-Allow-Credentials', true);
+
+
     return next();
   });
 
