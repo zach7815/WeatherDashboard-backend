@@ -193,9 +193,13 @@ res.end()
 
 app.post("/api/unsplashImages" ,async (req,res)=>{
 
-    let    lat=req.body.lat;
+
+    let lat=req.body.lat;
     let  lng=req.body.lng;
+
+    console.log(lat, lng)
         let geoData=`${encodeURIComponent(lat)},${encodeURIComponent(lng)}`;
+
 try{
  const result = await openCage.geocode({q:geoData, key:openCageKey, language:"En"});
 const locationData = await result;
@@ -228,6 +232,7 @@ res.end()
 app.post("/api/fiveDayForecast", async(req,res)=>{
 let lat=req.body.lat;
 let lng=req.body.lng;
+console.log(lat, lng)
     try{
  const forecast = await getForecast("forecast",lat, lng);
           console.log(forecast);
