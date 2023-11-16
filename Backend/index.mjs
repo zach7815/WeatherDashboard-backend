@@ -44,6 +44,7 @@ const getImage= async (location)=>{
         });
 
         const {response}= photoList;
+        console.log('the response for get image photolist is:', response)
         const results= response.results;
         const randomPhotoInfo= results[randomNumber(10)]
 
@@ -88,20 +89,24 @@ const isCity = (calltype,lat, lng, city)=>{
     {
         if(!city){
             URL=`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&appid=${openWeatherKey}`;
+            console.log("THE URL being targeted is:",URL)
            return URL;
        }
        else{
             URL= `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${openWeatherKey}`;
+            console.log("THE URL being targeted is:",URL)
             return URL;
        }
     }
     else{
         if(!city){
             URL=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=${openWeatherKey}`;
+            console.log("THE URL being targeted is:",URL)
            return URL;
        }
        else{
             URL= `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${openWeatherKey}`;
+            console.log("THE URL being targeted is:",URL)
             return URL;
        }
     }
@@ -109,9 +114,12 @@ const isCity = (calltype,lat, lng, city)=>{
 };
 
 const getWeather = async (calltype, lat, lng, city)=>{
+    console.log(calltype);
   const URL=isCity(calltype, lat,lng,city);
     const response= await nodeFetch(URL);
+    console.log(response);
     const result= await response.json();
+    console.log(result)
     const {weather,main, wind, sys, name}= result;
 
     const currentWeather={
@@ -135,7 +143,9 @@ const getWeather = async (calltype, lat, lng, city)=>{
 const getForecast = async (calltype,lat, lng, city)=>{
     const URL= await isCity(calltype,lat,lng,city);
     const response= await nodeFetch(URL);
+    console.log(`the response for getForecast is:`, response);
 const result= await response.json();
+    console.log(`the result data for getForecast is:`, result);
 
 if(result.cod==="404"){
     return undefined
@@ -193,7 +203,6 @@ res.end()
 
 app.post("/api/unsplashImages" ,async (req,res)=>{
 
-
     let lat=req.body.lat;
     let  lng=req.body.lng;
 
@@ -203,7 +212,9 @@ app.post("/api/unsplashImages" ,async (req,res)=>{
 try{
  const result = await openCage.geocode({q:geoData, key:openCageKey, language:"En"});
 const locationData = await result;
+console.log(locationData)
 const locationObject =await destructGeoData(locationData);
+console.log(locationObject)
 const refinedImageData = await getImage(locationObject);
     console.log(refinedImageData);
 res.json(refinedImageData);
